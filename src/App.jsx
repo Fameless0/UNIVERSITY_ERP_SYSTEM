@@ -1,74 +1,98 @@
+import React, { useState } from 'react';
+
 function App() {
+  const [isSignUp, setIsSignUp] = useState(false);
+
+  const toggleForm = () => {
+    setIsSignUp((prev) => !prev);
+  };
+
   return (
-    <>
-      <div className="relative place-content-center justify-items-center h-dvh w-dvw bg-gray-900">
-        <div className='relative rounded-3xl overflow-hidden h-96 w-custom-width bg-gradient-to-r from-red-600 to-yellow-500 text-center shadow-shcustom'>
-          <form className='flex hidden gap-2 flex-col h-64 py-4 justify-between'>
-
-            <h1 className="py-2 text-3xl font-bold underline text-blue-700">
-              Login
-            </h1>
-            
-            <label className='text-white px-3'>
-              Email :
-            </label>
-            <input className='w-7/12 self-center' type="email" id="email" required>
-            </input>
-            <label className='text-white px-3'>
-              Password :
-            </label>
-            <input className='w-7/12 self-center' type="password" id="password" required>
-            </input>
-            <button className='w-14 self-center border-transparent border-white rounded-md bg-white hover:bg-green-500'>
-              LogIn
+    <div className="relative flex items-center justify-center h-screen bg-gray-900">
+      <div
+        className={`relative overflow-hidden rounded-3xl w-[400px] bg-gradient-to-r from-red-600 to-yellow-500 shadow-lg transform transition-all duration-500 ${isSignUp ? 'h-[500px]' : 'h-[400px]'
+          }`}
+      >
+        <div
+          className={`absolute inset-0 transform transition-transform duration-500 ${isSignUp ? '-translate-x-full' : 'translate-x-0'
+            }`}
+        >
+          <form className="flex flex-col items-center justify-center h-full gap-4 text-white">
+            <h1 className="text-3xl font-bold underline text-blue-700">Sign In</h1>
+            <label className="w-3/4 text-left">Email:</label>
+            <input
+              className="w-3/4 px-2 py-1 text-black rounded-md"
+              type="email"
+              required
+            />
+            <label className="w-3/4 text-left">Password:</label>
+            <input
+              className="w-3/4 px-2 py-1 text-black rounded-md"
+              type="password"
+              required
+            />
+            <button
+              className="px-4 py-2 mt-4 text-black bg-white rounded-md hover:bg-green-500"
+              type="submit"
+            >
+              Log In
             </button>
-            
-              <p>
-                Don't have an account ?
-                <a href="#" className="hover:underline hover:text-purple-900">
-                  Sign up
-                </a>
-              </p>
-            
+            <p>
+              Don't have an account?{' '}
+              <button
+                onClick={toggleForm}
+                className="text-purple-900 underline hover:no-underline"
+              >
+                Sign Up
+              </button>
+            </p>
           </form>
-          <form className='relative flex gap-2 flex-col h-64 py-4 justify-between top-4'>
+        </div>
 
-            <h1 className="h-12 w-full text-3xl font-bold underline text-blue-700">
-              SignUp
-            </h1>
-            <label className='text-white px-3'>
-              Username :
-            </label>
-            <input className='w-7/12 self-center' required>
-            </input>
-            <label className='text-white px-3'>
-              Email :
-            </label>
-            <input className='w-7/12 self-center' type="email" id="email" required>
-            </input>
-            <label className='text-white px-3'>
-              Password :
-            </label>
-            <input className='w-7/12 self-center' type="password" id="password" required>
-            </input>
-            <button className='my-2 w-24 self-center border-transparent border-white rounded-md bg-white hover:bg-green-500'>
+        <div
+          className={`absolute inset-0 transform transition-transform duration-500 ${isSignUp ? 'translate-x-0' : 'translate-x-full'
+            }`}
+        >
+          <form className="flex flex-col items-center justify-center h-full gap-4 text-white">
+            <h1 className="text-3xl font-bold underline text-blue-700">Sign Up</h1>
+            <label className="w-3/4 text-left">Username:</label>
+            <input
+              className="w-3/4 px-2 py-1 text-black rounded-md"
+              type="text"
+              required
+            />
+            <label className="w-3/4 text-left">Email:</label>
+            <input
+              className="w-3/4 px-2 py-1 text-black rounded-md"
+              type="email"
+              required
+            />
+            <label className="w-3/4 text-left">Password:</label>
+            <input
+              className="w-3/4 px-2 py-1 text-black rounded-md"
+              type="password"
+              required
+            />
+            <button
+              className="px-4 py-2 mt-4 text-black bg-white rounded-md hover:bg-green-500"
+              type="submit"
+            >
               Register
             </button>
-            
-              <p>
-                Aready have an account ?
-                <a href="#" className="hover:underline hover:text-purple-900">
-                  LogIn
-                </a>
-              </p>
-            
+            <p>
+              Already have an account?{' '}
+              <button
+                onClick={toggleForm}
+                className="text-purple-900 underline hover:no-underline"
+              >
+                Log In
+              </button>
+            </p>
           </form>
         </div>
       </div>
-
-    </>
-
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
