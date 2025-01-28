@@ -7,17 +7,25 @@ function App() {
     setIsSignUp((prev) => !prev);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Form submitted!");
+  };
+
   return (
     <div className="relative flex items-center justify-center h-screen bg-gray-900">
       <div
-        className={`relative overflow-hidden rounded-3xl w-[400px] bg-gradient-to-r from-red-600 to-yellow-500 shadow-lg transform transition-all duration-500 ${isSignUp ? 'h-[500px]' : 'h-[400px]'
+        className={`relative overflow-hidden rounded-3xl w-[400px] bg-gradient-to-r from-red-600 to-yellow-500 shadow-lg transform transition-all duration-500 ${isSignUp ? 'h-[470px]' : 'h-[400px]'
           }`}
       >
         <div
           className={`absolute inset-0 transform transition-transform duration-500 ${isSignUp ? '-translate-x-full' : 'translate-x-0'
             }`}
         >
-          <form className="flex flex-col items-center justify-center h-full gap-4 text-white">
+          <form
+            className="flex flex-col items-center justify-center h-full gap-4 text-white"
+            onSubmit={handleSubmit}
+          >
             <h1 className="text-3xl font-bold underline text-blue-700">Sign In</h1>
             <label className="w-3/4 text-left">Email:</label>
             <input
@@ -42,6 +50,7 @@ function App() {
               <button
                 onClick={toggleForm}
                 className="text-purple-900 underline hover:no-underline"
+                type="button"
               >
                 Sign Up
               </button>
@@ -53,7 +62,10 @@ function App() {
           className={`absolute inset-0 transform transition-transform duration-500 ${isSignUp ? 'translate-x-0' : 'translate-x-full'
             }`}
         >
-          <form className="flex flex-col items-center justify-center h-full gap-4 text-white">
+          <form
+            className="flex flex-col items-center justify-center h-full gap-4 text-white"
+            onSubmit={handleSubmit}
+          >
             <h1 className="text-3xl font-bold underline text-blue-700">Sign Up</h1>
             <label className="w-3/4 text-left">Username:</label>
             <input
@@ -84,6 +96,7 @@ function App() {
               <button
                 onClick={toggleForm}
                 className="text-purple-900 underline hover:no-underline"
+                type="button"
               >
                 Log In
               </button>
