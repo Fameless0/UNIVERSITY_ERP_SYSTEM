@@ -1,110 +1,169 @@
-import React, { useState } from 'react';
+// import React from 'react';
+// import Login from "../src/components/Login"
+// import UserForm from "./components/UserForm"
+// import StudentDashboard from "./components/StudentDashboard"
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path='/xyz' element={<Login />}>
+//         </Route>
+//         <Route path='/SignIn' element={<UserForm />}>
+//         </Route>
+//         <Route path='/' element={<StudentDashboard />}>
+//         </Route>
+//       </Routes>
+//     </Router>
+//   )
+// }
+
+// export default App;
+
+
+
+
+// import React from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Login from "./components/Login";
+// import UserForm from "./components/UserForm";
+// import StudentDashboard from "./components/StudentDashboard";
+// import Assignments from "./components/Assignments";
+// import FeeDetails from "./components/FeeDetails";
+// import LibraryDetails from "./components/LibraryDetails";
+// import EventsPlacement from "./components/EventsPlacement";
+// import QuestionBank from "./components/QuestionBank";
+// // import Sidebar from "./components/Sidebar";
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" element={<Login />} />
+//         <Route path="/signin" element={<UserForm />} />
+//         <Route path="/erp" element={<StudentDashboard />}>
+//           <Route path="assignments" element={<Assignments />} />
+//           <Route path="fees" element={<FeeDetails />} />
+//           <Route path="library" element={<LibraryDetails />} />
+//           <Route path="events" element={<EventsPlacement />} />
+//           <Route path="question-bank" element={<QuestionBank />} />
+//         </Route>
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
+
+// import React from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Login from "./components/Login";
+// import UserForm from "./components/UserForm";
+// import StudentDashboard from "./components/StudentDashboard";
+// import FacultyDashboard from "./components/FacultyDashboard";
+// import Assignments from "./components/Assignments";
+// import FeeDetails from "./components/FeeDetails";
+// import LibraryDetails from "./components/LibraryDetails";
+// import EventsPlacement from "./components/EventsPlacement";
+// import QuestionBank from "./components/QuestionBank";
+// import FormGenerator from "./components/FormGenerator";
+// import FacultyAssignments from "./components/FacultyAssignments";
+// import FacultyQuestionBank from "./components/FacultyQuestionBank";
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         {/* Login and Authentication */}
+//         <Route path="/" element={<Login />} />
+//         <Route path="/signin" element={<UserForm />} />
+
+//         {/* Student ERP Dashboard */}
+//         <Route path="/erp" element={<StudentDashboard />}>
+//           <Route path="assignments" element={<Assignments />} />
+//           <Route path="fees" element={<FeeDetails />} />
+//           <Route path="library" element={<LibraryDetails />} />
+//           <Route path="events" element={<EventsPlacement />} />
+//           <Route path="question-bank" element={<QuestionBank />} />
+//         </Route>
+
+//         {/* Faculty Dashboard */}
+//         <Route path="/faculty" element={<FacultyDashboard />}>
+//           <Route path="form-generator" element={<FormGenerator />} />
+//           <Route path="assignments" element={<FacultyAssignments />} />
+//           <Route path="question-bank" element={<FacultyQuestionBank />} />
+//         </Route>
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
+
+
+// import React from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Login from "./components/Login";
+// import UserForm from "./components/UserForm";
+// import StudentDashboard from "./components/StudentDashboard";
+// import FacultyDashboard from "./components/FacultyDashboard"; // Add Faculty Dashboard
+// import EmployeeDashboard from "./components/EmployeeDashboard"; // Add Employee Dashboard
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" element={<Login />} />
+//         <Route path="/signin" element={<UserForm />} />
+//         <Route path="/erp" element={<StudentDashboard />} />
+//         <Route path="/faculty-dashboard" element={<FacultyDashboard />} />
+//         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import UserForm from "./components/UserForm";
+import StudentDashboard from "./components/StudentDashboard";
+import FacultyDashboard from "./components/FacultyDashboard";
+import EmployeeDashboard from "./components/EmployeeDashboard";
+import Assignments from "./components/Assignments";
+import FeeDetails from "./components/FeeDetails";
+import LibraryDetails from "./components/LibraryDetails";
+import EventsPlacement from "./components/EventsPlacement";
+import QuestionBank from "./components/QuestionBank";
+import FacultyAssignments from "./components/FacultyAssignments";
+import FacultyQuestionBank from "./components/FacultyQuestionBank";
 
 function App() {
-  const [isSignUp, setIsSignUp] = useState(false);
-
-  const toggleForm = () => {
-    setIsSignUp((prev) => !prev);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Form submitted!");
-  };
-
   return (
-    <div className="relative flex items-center justify-center h-screen bg-gray-900">
-      <div
-        className={`relative overflow-hidden rounded-3xl w-[400px] bg-gradient-to-r from-red-600 to-yellow-500 shadow-lg transform transition-all duration-500 ${isSignUp ? 'h-[470px]' : 'h-[400px]'
-          }`}
-      >
-        <div
-          className={`absolute inset-0 transform transition-transform duration-500 ${isSignUp ? '-translate-x-full' : 'translate-x-0'
-            }`}
-        >
-          <form
-            className="flex flex-col items-center justify-center h-full gap-4 text-white"
-            onSubmit={handleSubmit}
-          >
-            <h1 className="text-3xl font-bold underline text-blue-700">Sign In</h1>
-            <label className="w-3/4 text-left">Email:</label>
-            <input
-              className="w-3/4 px-2 py-1 text-black rounded-md"
-              type="email"
-              required
-            />
-            <label className="w-3/4 text-left">Password:</label>
-            <input
-              className="w-3/4 px-2 py-1 text-black rounded-md"
-              type="password"
-              required
-            />
-            <button
-              className="px-4 py-2 mt-4 text-black bg-white rounded-md hover:bg-green-500"
-              type="submit"
-            >
-              Log In
-            </button>
-            <p>
-              Don't have an account?{' '}
-              <button
-                onClick={toggleForm}
-                className="text-purple-900 underline hover:no-underline"
-                type="button"
-              >
-                Sign Up
-              </button>
-            </p>
-          </form>
-        </div>
-
-        <div
-          className={`absolute inset-0 transform transition-transform duration-500 ${isSignUp ? 'translate-x-0' : 'translate-x-full'
-            }`}
-        >
-          <form
-            className="flex flex-col items-center justify-center h-full gap-4 text-white"
-            onSubmit={handleSubmit}
-          >
-            <h1 className="text-3xl font-bold underline text-blue-700">Sign Up</h1>
-            <label className="w-3/4 text-left">Username:</label>
-            <input
-              className="w-3/4 px-2 py-1 text-black rounded-md"
-              type="text"
-              required
-            />
-            <label className="w-3/4 text-left">Email:</label>
-            <input
-              className="w-3/4 px-2 py-1 text-black rounded-md"
-              type="email"
-              required
-            />
-            <label className="w-3/4 text-left">Password:</label>
-            <input
-              className="w-3/4 px-2 py-1 text-black rounded-md"
-              type="password"
-              required
-            />
-            <button
-              className="px-4 py-2 mt-4 text-black bg-white rounded-md hover:bg-green-500"
-              type="submit"
-            >
-              Register
-            </button>
-            <p>
-              Already have an account?{' '}
-              <button
-                onClick={toggleForm}
-                className="text-purple-900 underline hover:no-underline"
-                type="button"
-              >
-                Log In
-              </button>
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signin" element={<UserForm />} />
+        <Route path="/erp/student" element={<StudentDashboard />}>
+          <Route path="assignments" element={<Assignments />} />
+          <Route path="fees" element={<FeeDetails />} />
+          <Route path="library" element={<LibraryDetails />} />
+          <Route path="events" element={<EventsPlacement />} />
+          <Route path="question-bank" element={<QuestionBank />} />
+        </Route>
+        <Route path="/erp/faculty" element={<FacultyDashboard />}>
+          <Route path="assignments" element={<FacultyAssignments />} />
+          <Route path="question-bank" element={<FacultyQuestionBank />} />
+        </Route>
+        <Route path="/erp/employee" element={<EmployeeDashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
