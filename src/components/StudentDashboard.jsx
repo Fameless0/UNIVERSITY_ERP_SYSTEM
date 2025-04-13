@@ -1,16 +1,116 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { Bell, User } from "lucide-react";
+import BellIcon from "../assets/icons/bell.png";
+import UserIcon from "../assets/icons/profile.png";
+import SettingsIcon from "../assets/icons/settings.png"; // Import the settings icon
+import ExitIcon from "../assets/icons/logout.png"; // Import the exit icon
 
+// Card Component
 const Card = ({ title, children }) => (
-  <div className="bg-white/10 p-6 rounded-2xl">
-    <h2 className="text-xl font-semibold mb-4">{title}</h2>
+  <div className="bg-white/10 p-4 rounded-2xl border border-white/20">
+    <h2 className="text-lg font-semibold mb-3 text-white">{title}</h2>
     {children}
   </div>
 );
 
+// Circular Progress Component
+// Circular Progress Component
+const CircularProgress = ({ value }) => {
+  const percentage = Math.min(Math.max(value, 0), 100);
+  const radius = 20; // Adjusted radius for better fit
+  const strokeWidth = 4; // Set the stroke width for the circle
+  const circumference = 2 * Math.PI * radius; // Calculate circumference
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  return (
+    <div className="relative w-28 h-28 mx-auto"> {/* Added padding and larger size */}
+      <svg width="100%" height="100%" viewBox="0 0 48 48" className="rotate-90">
+        <circle
+          cx="24"
+          cy="24"
+          r={radius}
+          stroke="rgba(255, 255, 255, 0.1)"
+          strokeWidth={strokeWidth}
+          fill="transparent"
+        />
+        <circle
+          cx="24"
+          cy="24"
+          r={radius}
+          stroke="white"
+          strokeWidth={strokeWidth}
+          fill="transparent"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          style={{ transition: 'stroke-dashoffset 0.35s' }}
+        />
+      </svg>
+      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+        <span className="text-white font-bold text-lg">{percentage}%</span>
+      </div>
+    </div>
+  );
+};
+
+
+
+// Calendar Card Component
+const CalendarCard = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth(); // 0-indexed (April = 3)
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDayOfMonth = new Date(year, month, 1).getDay(); // Sun = 0
+  const currentDate = today.getDate();
+
+  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return (
+    <Card title="Calendar">
+      <div className="grid grid-cols-7 gap-x-0 gap-y-3 text-center text-[11px] text-white">
+
+        {weekdays.map((day) => (
+          <div key={day} className="font-semibold">
+            {day}
+          </div>
+        ))}
+
+        {/* Empty slots before 1st */}
+        {Array.from({ length: firstDayOfMonth }).map((_, idx) => (
+          <div key={`empty-${idx}`} />
+        ))}
+
+        {/* Calendar days */}
+        {Array.from({ length: daysInMonth }, (_, i) => {
+          const date = i + 1;
+          const dateObj = new Date(year, month, date);
+          const dayOfWeek = dateObj.getDay();
+          const isPast = date < currentDate;
+
+          return (
+            <div
+              key={date}
+              className={`w-9 h-9 mx-auto rounded-full flex flex-col items-center justify-center 
+                ${dayOfWeek === 0 ? "bg-orange-500" : "bg-white"}
+                ${isPast ? "opacity-40" : ""}
+                text-black leading-tight`}
+            >
+              {/* <span className="text-[9px]">{weekdays[dayOfWeek][0]}</span> */}
+              <span className="text-sm">{date}</span>
+            </div>
+          );
+        })}
+      </div>
+    </Card>
+  );
+};
+
+
+
+// Sidebar Component
 const Sidebar = () => (
-  <div className="bg-white/20 p-6 rounded-2xl min-h-screen w-64">
-    <ul className="space-y-4">
+  <div className="bg-white/20 p-6 rounded-2xl h-[420px] w-64 ml-6 mt-10">
+    <ul className="text-white divide-y divide-white/30">
       {[
         { path: "/erp", label: "Dashboard" },
         { path: "/erp/assignments", label: "Assignments" },
@@ -21,14 +121,21 @@ const Sidebar = () => (
         { path: "/erp/results", label: "All Results" },
         { path: "/erp/feedback", label: "Help / Feedback" },
       ].map((item) => (
-        <li key={item.path}>
+        <li key={item.path} className="py-3">
           <NavLink
             to={item.path}
             className={({ isActive }) =>
-              `block ${isActive ? "text-blue-400 font-bold" : ""}`
+              `flex justify-center items-center gap-2 ${isActive ? "font-bold text-white" : ""}`
             }
           >
-            {item.label}
+            {({ isActive }) => (
+              <>
+                {isActive && (
+                  <span className="text-white text-xl leading-none">•</span>
+                )}
+                <span>{item.label}</span>
+              </>
+            )}
           </NavLink>
         </li>
       ))}
@@ -36,200 +143,104 @@ const Sidebar = () => (
   </div>
 );
 
-const Dashboard = () => (
-  <div className="p-6 text-white w-full">
-    <h1 className="text-2xl font-bold mb-6">DASHBOARD</h1>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card title="Today's Schedule">
-        <ul className="space-y-2">
-          <li>9:30 - 10:30 <span className="font-bold">Big Data</span></li>
-          <li>10:30 - 11:30 <span className="font-bold">AEC - III</span></li>
-          <li>11:30 - 12:30 <span className="font-bold">Software Testing</span></li>
-          <li>12:30 - 01:30 <span className="font-bold">Library</span></li>
-        </ul>
-        <p className="mt-4 text-sm text-center">END OF THE DAY</p>
-      </Card>
-      <Card title="Today's Attendance">
-        <div className="text-4xl font-bold text-center">70%</div>
-      </Card>
-      <Card title="Overall Attendance">
-        <div className="text-4xl font-bold text-center">82.5%</div>
-      </Card>
-    </div>
+
+const SettingsCard = () => (
+  <div className="ml-6 mt-4 w-64"> {/* Same width as Sidebar */}
+    <Card>
+      <div className="flex justify-center items-center gap-6">
+        <img
+          src={SettingsIcon}
+          alt="Settings"
+          className="w-8 h-8 cursor-pointer hover:opacity-80"
+        />
+        <img
+          src={ExitIcon}
+          alt="Exit"
+          className="w-8 h-8 cursor-pointer hover:opacity-80"
+        />
+      </div>
+    </Card>
   </div>
 );
 
+
+
+// Dashboard Layout
 const StudentDashboard = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-500 to-purple-500 flex">
-      <Sidebar />
-      <div className="flex-1 p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">STUDENT ERP</h1>
-          <div className="flex gap-4">
-            <Bell className="cursor-pointer" />
-            <User className="cursor-pointer" />
-          </div>
-        </div>
-        <Outlet />
-      </div>
-    </div>
-  );
-};
-
-export default StudentDashboard;
-
-
-
-
-
-
-
-
-
-
-/*
-import React from "react";
-import { Bell, User, Settings, LogOut } from "lucide-react";
-
-const Card = ({ title, children }) => (
-  <div className="bg-white/10 p-6 rounded-2xl">
-    <h2 className="text-xl font-semibold mb-4">{title}</h2>
-    {children}
-  </div>
-);
-
-const StudentDashboard = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-500 to-purple-500 p-6 text-white">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">DASHBOARD</h1>
-        <div className="flex gap-4">
-          <Bell className="cursor-pointer" />
-          <User className="cursor-pointer" />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card title="Today's Schedule">
-          <ul className="space-y-2">
-            <li>9:30 - 10:30 <span className="font-bold">Big Data</span></li>
-            <li>10:30 - 11:30 <span className="font-bold">AEC - III</span></li>
-            <li>11:30 - 12:30 <span className="font-bold">Software Testing</span></li>
-            <li>12:30 - 01:30 <span className="font-bold">Library</span></li>
-          </ul>
-          <p className="mt-4 text-sm text-center">END OF THE DAY</p>
-        </Card>
-
-        <Card title="Today's Attendance">
-          <div className="text-4xl font-bold text-center">70%</div>
-        </Card>
-
-        <Card title="Overall Attendance">
-          <div className="text-4xl font-bold text-center">82.5%</div>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        <Card title="Calendar">
-          <p className="text-center">[Calendar UI Placeholder]</p>
-        </Card>
-      </div>
-
-      <div className="fixed bottom-6 left-6 flex gap-4">
-        <Settings className="cursor-pointer" />
-        <LogOut className="cursor-pointer" />
-      </div>
-    </div>
-  );
-};
-
-export default StudentDashboard;
-
-
-
-
-
-
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Bell, User, Settings, LogOut } from "lucide-react";
-
-const Card = ({ title, children }) => (
-  <div className="bg-white/10 p-6 rounded-2xl">
-    <h2 className="text-xl font-semibold mb-4">{title}</h2>
-    {children}
-  </div>
-);
-
-const Sidebar = () => (
-  <div className="bg-white/20 p-6 rounded-2xl min-h-screen w-64">
-    <ul className="space-y-4">
-      <li><Link to="/" className="block">Dashboard</Link></li>
-      <li><Link to="/assignments" className="block">Assignments</Link></li>
-      <li><Link to="/fee-details" className="block">Fee Details</Link></li>
-      <li><Link to="/library-details" className="block">Library Details</Link></li>
-      <li><Link to="/events" className="block">Events / Placement</Link></li>
-      <li><Link to="/question-bank" className="block">Question Bank</Link></li>
-      <li><Link to="/results" className="block">All Results</Link></li>
-      <li><Link to="/feedback" className="block">Help / Feedback</Link></li>
-    </ul>
-  </div>
-);
-
-const Dashboard = () => (
-  <div className="p-6 text-white w-full">
-    <h1 className="text-2xl font-bold mb-6">DASHBOARD</h1>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card title="Today's Schedule">
-        <ul className="space-y-2">
-          <li>9:30 - 10:30 <span className="font-bold">Big Data</span></li>
-          <li>10:30 - 11:30 <span className="font-bold">AEC - III</span></li>
-          <li>11:30 - 12:30 <span className="font-bold">Software Testing</span></li>
-          <li>12:30 - 01:30 <span className="font-bold">Library</span></li>
-        </ul>
-        <p className="mt-4 text-sm text-center">END OF THE DAY</p>
-      </Card>
-      <Card title="Today's Attendance">
-        <div className="text-4xl font-bold text-center">70%</div>
-      </Card>
-      <Card title="Overall Attendance">
-        <div className="text-4xl font-bold text-center">82.5%</div>
-      </Card>
-    </div>
-  </div>
-);
-
-const StudentDashboard = () => {
-  return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-r from-pink-500 to-purple-500 flex">
+    <div
+      className="min-h-screen flex"
+      style={{
+        background: "linear-gradient(300deg,rgba(67, 10, 199, 0.96),rgba(255, 35, 15, 0.95))",
+      }}
+    >
+      <div className="mt-6 flex flex-col">
         <Sidebar />
-        <div className="flex-1 p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold">STUDENT ERP</h1>
-            <div className="flex gap-4">
-              <Bell className="cursor-pointer" />
-              <User className="cursor-pointer" />
-            </div>
+        <SettingsCard />
+      </div>
+
+      <div className="border-l-2 border-white/20 h-full"></div>
+
+      <div className="flex-1 p-6 overflow-auto">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl text-white">DASHBOARD</h1>
+          <div className="flex gap-4 items-center">
+            <img src={BellIcon} alt="Notifications" className="w-10 h-10 cursor-pointer hover:opacity-80" />
+            <img src={UserIcon} alt="User Profile" className="w-10 h-10 cursor-pointer hover:opacity-80" />
           </div>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/assignments" element={<Card title="Assignments">Assignments Content</Card>} />
-            <Route path="/fee-details" element={<Card title="Fee Details">Fee Details Content</Card>} />
-            <Route path="/library-details" element={<Card title="Library Details">Library Details Content</Card>} />
-            <Route path="/events" element={<Card title="Events / Placement">Events Content</Card>} />
-            <Route path="/question-bank" element={<Card title="Question Bank">Question Bank Content</Card>} />
-            <Route path="/results" element={<Card title="All Results">Results Content</Card>} />
-            <Route path="/feedback" element={<Card title="Help / Feedback">Feedback Content</Card>} />
-          </Routes>
+        </div>
+
+        {/* Top row: Schedule + Calendar */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <Card title="Today's Schedule">
+            <ul className="space-y-2 text-white text-sm">
+              <li className="flex justify-between border-b-2 border-white py-1">
+                <span>9:30 - 10:30</span>
+                <span className="font-semibold">Big Data</span>
+              </li>
+              <li className="flex justify-between border-b-2 border-white py-1">
+                <span>10:30 - 11:30</span>
+                <span className="font-semibold">AEC - III</span>
+              </li>
+              <li className="flex justify-between border-b-2 border-white py-1">
+                <span>11:30 - 12:30</span>
+                <span className="font-semibold">Software Testing</span>
+              </li>
+              <li className="flex justify-between border-b-2 border-white py-1">
+                <span>12:30 - 01:30</span>
+                <span className="font-semibold">Library</span>
+              </li>
+            </ul>
+            <p className="mt-3 text-xs text-center text-white/70">END OF THE DAY</p>
+          </Card>
+
+          <CalendarCard />
+        </div>
+
+
+
+
+        {/* Bottom row: Attendance */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <Card title="Today's Attendance">
+            <div className="flex items-center justify-center p-4">
+              <CircularProgress value={70} />
+            </div>
+          </Card>
+
+          <Card title="Overall Attendance">
+            <div className="flex items-center justify-center p-4">
+              <CircularProgress value={82.5} />
+            </div>
+          </Card>
+
         </div>
       </div>
-    </Router>
+    </div>
   );
 };
 
 export default StudentDashboard;
 
 
-*/
