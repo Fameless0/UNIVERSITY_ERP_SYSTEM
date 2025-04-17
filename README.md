@@ -21,3 +21,12 @@ Use these values for role:
 "Librarian"
 
 "Accountant"
+
+
+
+.env file format
+
+DB_HOST=   //hostname eg : localhost
+DB_USER=   //user created in mariadb
+DB_PASSWORD=  //mariadb's user password
+DB_NAME=     //database name
