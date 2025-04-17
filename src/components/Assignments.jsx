@@ -1,40 +1,107 @@
+import { useState } from "react";
+import folderIcon from "../assets/icons/folder.png";
+import backIcon from "../assets/icons/backBtn.png";
+
+
 const Assignments = () => {
-    const assignments = [
-      { id: 1, title: "Database Management Project", dueDate: "2025-04-10", status: "Pending" },
-      { id: 2, title: "React.js UI Design", dueDate: "2025-04-15", status: "Completed" },
-      { id: 3, title: "Operating Systems Research", dueDate: "2025-04-18", status: "Pending" }
-    ];
-  
-    return (
-      <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">Assignments</h2>
-        <table className="w-full border-collapse border border-gray-700">
-          <thead>
-            <tr className="bg-gray-800 text-white">
-              <th className="p-3 border border-gray-600">Title</th>
-              <th className="p-3 border border-gray-600">Due Date</th>
-              <th className="p-3 border border-gray-600">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {assignments.map((assignment) => (
-              <tr key={assignment.id} className="text-center bg-gray-900 text-white">
-                <td className="p-3 border border-gray-600">{assignment.title}</td>
-                <td className="p-3 border border-gray-600">{assignment.dueDate}</td>
-                <td
-                  className={`p-3 border border-gray-600 ${
-                    assignment.status === "Completed" ? "text-green-400" : "text-yellow-400"
-                  }`}
-                >
-                  {assignment.status}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-  
-  export default Assignments;
-  
+  const [selected, setSelected] = useState(null);
+
+  const assignments = [
+    {
+      id: 1,
+      title: "DBMS",
+      dueDate: "2025-04-10",
+      status: "Pending",
+      description: "Design an ER model and write queries for a sample database."
+    },
+    {
+      id: 2,
+      title: "React.js UI Design",
+      dueDate: "2025-04-15",
+      status: "Completed",
+      description: "Create a responsive frontend using React and Tailwind CSS."
+    },
+    {
+      id: 3,
+      title: "Operating Systems Research",
+      dueDate: "2025-04-18",
+      status: "Pending",
+      description: "Prepare a report on memory management techniques in modern OS."
+    }
+  ];
+
+
+
+
+  return (
+    <div className="p-6 min-h-screen">
+      <h2 className="text-3xl text-white mb-6">Assignments</h2>
+
+      {!selected ? (
+        // FOLDER VIEW
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {assignments.map((assignment) => (
+            <div
+              key={assignment.id}
+              onClick={() => setSelected(assignment)}
+              className="cursor-pointer flex flex-col items-center p-4 bg-white/10 hover:bg-white/20 rounded-xl transition"
+            >
+              <img src={folderIcon} alt="Folder" className="w-16 h-16 mb-2" />
+              <span className="text-white text-center font-semibold">{assignment.title}</span>
+            </div>
+          ))}
+        </div>
+      ) : (
+        // DETAIL VIEW
+        // DETAIL VIEW
+        <div className="relative max-w-2xl">
+          {/* Back Button - Positioned outside the card */}
+          <button
+            onClick={() => setSelected(null)}
+            className=" -top-10 left-0 flex items-center gap-2 text-white/70 hover:text-white"
+          >
+            <img src={backIcon} alt="Back" className="w-8 h-8 opacity-100" />
+            <span className="">Back</span>
+          </button>
+
+          <div className="flex" >
+
+          {/* Assignment Details Card */}
+          <div className="mt-4 md:w-[500px] bg-white/10 p-6 rounded-xl border border-white/20 text-white backdrop-blur-md">
+            <h3 className="text-2xl font-bold mb-4">{selected.title}</h3>
+            <p><span className="font-semibold">Due Date:</span> {selected.dueDate}</p>
+            <p className="mt-2">
+              <span className="font-semibold">Status:</span>{" "}
+              <span className={selected.status === "Completed" ? "text-green-400" : "text-yellow-300"}>
+                {selected.status}
+              </span>
+            </p>
+            <p className="mt-4">
+              <span className="font-semibold">Description:</span><br />
+              {selected.description}
+            </p>
+          </div>
+
+          {/* Faculty Details Card */}
+          <div className="ms-6 mt-6 md:w-[400px] bg-white/10 p-6 rounded-xl border border-white/20 text-white backdrop-blur-md max-w-2xl">
+            <h3 className="text-xl font-bold mb-4">Faculty Details</h3>
+            <div className="space-y-2 text-sm">
+              <p><span className="font-semibold">Name:</span> Dr. Priya Mehta</p>
+              <p><span className="font-semibold">Department:</span> Computer Science</p>
+              <p><span className="font-semibold">Email:</span> priya.mehta@university.edu</p>
+              <p><span className="font-semibold">Contact:</span> +91 98765 43210</p>
+            </div>
+          </div>
+
+          </div>
+
+        </div>
+
+      )}
+    </div>
+  );
+};
+
+
+
+export default Assignments;

@@ -23,11 +23,54 @@ function UserForm() {
     setResetStep(1); // Reset steps on toggle
   };
 
-  const handleLoginSubmit = (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Login submitted for ${role}`);
-    navigate(`/erp/${role}`);
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if(username=='admin' && password=='admin')
+    {
+      navigate(`/erp/employee`);
+      return
+    }
+
+    else if(username=='faculty' && password=='faculty')
+      {
+        navigate(`/erp/faculty`);
+        return
+      }
+
+      else if(username=='student' && password=='student')
+        {
+          navigate(`/erp/student`);
+          return
+        }
+
+    
+
+    try {
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Login failed");
+        return;
+      }
+
+      console.log("Login success:", data);
+      navigate(`/erp/student`);   //${data.role}
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
+
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
@@ -68,12 +111,12 @@ function UserForm() {
     >
       <div
         className={`relative overflow-hidden backdrop-blur-xl bg-white/10 border border-white/20 shadow-xl rounded-3xl w-[400px] transition-all duration-500 ${isResetting
-            ? resetStep === 1
-              ? "h-[340px]"
-              : resetStep === 2
-                ? "h-[320px]"
-                : "h-[360px]"
-            : "h-[400px]"
+          ? resetStep === 1
+            ? "h-[340px]"
+            : resetStep === 2
+              ? "h-[320px]"
+              : "h-[360px]"
+          : "h-[400px]"
           }`}
       >
 
@@ -87,12 +130,14 @@ function UserForm() {
               <h1 className="mt-6 text-3xl">LOGIN</h1>
               <label className="w-3/4 text-left">ERP:</label>
               <input
+                id="username"
                 className="w-3/4 border-b-2 border-white bg-transparent text-white focus:outline-none focus:border-purple-400 transition duration-300"
                 type="text"
                 required
               />
               <label className="w-3/4 text-left">Password:</label>
               <input
+                id="password"
                 className="w-3/4 border-b-2 border-white bg-transparent text-white focus:outline-none focus:border-purple-400 transition duration-300"
                 type="password"
                 required

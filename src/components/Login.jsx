@@ -1,37 +1,53 @@
-import React, { useState } from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import FacultyIcon from "../assets/icons/teacher.png";
+import StudentIcon from "../assets/icons/student.png";
+import EmployeeIcon from "../assets/icons/staff.png";
 
 function Login() {
-  const [role, setRole] = useState(""); 
   const navigate = useNavigate();
 
   const handleSelection = (selectedRole) => {
-    setRole(selectedRole);
-    navigate(`/signin?role=${selectedRole}`); // Pass role as query param
+    navigate(`/signin?role=${selectedRole}`);
   };
 
   return (
     <>
-      <div className="relative flex items-center justify-center h-screen bg-gray-900 gap-5">
-        <div 
+      <div
+        className="relative flex items-center justify-center h-screen gap-8 flex-wrap px-4"
+        style={{
+          background:
+            "linear-gradient(300deg, rgba(67, 10, 199, 0.96), rgba(255, 35, 15, 0.95))",
+        }}
+      >
+        {/* Faculty Card */}
+        <div
           onClick={() => handleSelection("faculty")}
-          className="relative h-80 w-96 mx-5 bg-[url('/faculty.png')] bg-cover bg-center text-white text-5xl text-center flex items-center justify-center cursor-pointer"
+          className="w-72 h-80 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:scale-105 transition-all duration-300"
         >
-          Faculty
+          <img src={FacultyIcon} alt="Faculty" className="w-20 h-20 mb-4" />
+          <h2 className="text-3xl font-semibold">Faculty</h2>
         </div>
-        <div 
+
+        {/* Student Card */}
+        <div
           onClick={() => handleSelection("student")}
-          className="relative h-80 w-96 mx-5 bg-[url('/student.jpg')] bg-cover bg-center text-white text-5xl text-center flex items-center justify-center cursor-pointer"
+          className="w-72 h-80 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:scale-105 transition-all duration-300"
         >
-          Student
+          <img src={StudentIcon} alt="Student" className="w-20 h-20 mb-4" />
+          <h2 className="text-3xl font-semibold">Student</h2>
         </div>
-        <div 
+
+        {/* Employee Card */}
+        <div
           onClick={() => handleSelection("employee")}
-          className="relative h-80 w-96 mx-5 bg-[url('/employee.jpg')] bg-cover bg-center text-white text-5xl text-center flex items-center justify-center cursor-pointer"
+          className="w-72 h-80 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:scale-105 transition-all duration-300"
         >
-          Employee
+          <img src={EmployeeIcon} alt="Employee" className="w-20 h-20 mb-4" />
+          <h2 className="text-3xl font-semibold">Employee</h2>
         </div>
       </div>
+
       <Outlet />
     </>
   );
