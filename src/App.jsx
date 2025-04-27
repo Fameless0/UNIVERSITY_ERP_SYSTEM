@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-<<<<<<< HEAD
-=======
 import DashboardConfigEditor from "./components/DashboardConfigEditor";
->>>>>>> back
 import Login from "./components/Login";
 import UserForm from "./components/UserForm";
 import StudentDashboard from "./components/StudentDashboard";
@@ -39,11 +36,8 @@ function App() {
           <Route path="question-bank" element={<FacultyQuestionBank />} />
         </Route>
         <Route path="/erp/employee" element={<EmployeeDashboard />} />
-<<<<<<< HEAD
-=======
         <Route path="/dashboard-config/:type" element={<DashboardConfigEditor />} />
         <Route path="/dashboard-config/:type" element={<DashboardConfigEditor />} />
->>>>>>> back
       </Routes>
     </Router>
   );
