@@ -21,7 +21,10 @@ const FacultyAssignments = () => {
     <div className="p-6 bg-white rounded-xl shadow-lg w-full">
       <h1 className="text-2xl font-bold mb-4">Faculty Assignments</h1>
       
+<<<<<<< HEAD
       {/* Assignment Input Fields */}
+=======
+>>>>>>> back
       <div className="mb-4">
         <input
           type="text"
@@ -41,7 +44,10 @@ const FacultyAssignments = () => {
         </button>
       </div>
 
+<<<<<<< HEAD
       {/* Display Assignments */}
+=======
+>>>>>>> back
       <ul className="space-y-2">
         {assignments.map((assignment, index) => (
           <li key={index} className="flex justify-between bg-gray-100 p-2 rounded">

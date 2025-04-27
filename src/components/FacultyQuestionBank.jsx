@@ -19,7 +19,10 @@ const FacultyQuestionBank = () => {
     <div className="p-6 bg-white rounded-xl shadow-lg w-full">
       <h1 className="text-2xl font-bold mb-4">Faculty Question Bank</h1>
       
+<<<<<<< HEAD
       {/* Question Input */}
+=======
+>>>>>>> back
       <div className="flex gap-2 mb-4">
         <input
           type="text"
@@ -33,7 +36,10 @@ const FacultyQuestionBank = () => {
         </button>
       </div>
 
+<<<<<<< HEAD
       {/* Display Questions */}
+=======
+>>>>>>> back
       <ul className="space-y-2">
         {questions.map((question, index) => (
           <li key={index} className="flex justify-between bg-gray-100 p-2 rounded">

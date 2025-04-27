@@ -124,7 +124,10 @@ function UserForm() {
           className={`flex w-[800px] transition-transform duration-500 ${isResetting ? "-translate-x-[400px]" : "translate-x-0"
             }`}
         >
+<<<<<<< HEAD
           {/* Login Form */}
+=======
+>>>>>>> back
           <div className="w-[400px] flex flex-col items-center justify-center h-full gap-4 text-white">
             <form className="w-full flex flex-col items-center gap-4" onSubmit={handleLoginSubmit}>
               <h1 className="mt-6 text-3xl">LOGIN</h1>
@@ -158,7 +161,10 @@ function UserForm() {
             </form>
           </div>
 
+<<<<<<< HEAD
           {/* Password Reset Form */}
+=======
+>>>>>>> back
           <div className="w-[400px] flex flex-col items-center justify-center h-full gap-4 text-white">
             <form
               className="w-full flex flex-col items-center gap-4"
