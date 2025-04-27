@@ -6,76 +6,22 @@ const Sidebar = () => {
       <h2 className="text-xl font-bold mb-5">Student ERP</h2>
       <ul>
         <li className="mb-3">
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive
-                ? "text-white font-bold relative before:content-['•'] before:absolute before:left-[-20px] before:text-white before:text-xl"
-                : ""
-            }
-          >
-            Dashboard
-          </NavLink>
+          <NavLink to="/erp/student" end>Dashboard</NavLink>
         </li>
         <li className="mb-3">
-          <NavLink
-            to="/students"
-            className={({ isActive }) =>
-              isActive
-                ? "text-white font-bold relative before:content-['•'] before:absolute before:left-[-20px] before:text-white before:text-xl"
-                : ""
-            }
-          >
-            Students
-          </NavLink>
+          <NavLink to="/erp/student/assignments">Assignments</NavLink>
         </li>
         <li className="mb-3">
-          <NavLink
-            to="/courses"
-            className={({ isActive }) =>
-              isActive
-                ? "text-white font-bold relative before:content-['•'] before:absolute before:left-[-20px] before:text-white before:text-xl"
-                : ""
-            }
-          >
-            Courses
-          </NavLink>
+          <NavLink to="/erp/student/fees">Fee Details</NavLink>
         </li>
         <li className="mb-3">
-          <NavLink
-            to="/attendance"
-            className={({ isActive }) =>
-              isActive
-                ? "text-white font-bold relative before:content-['•'] before:absolute before:left-[-20px] before:text-white before:text-xl"
-                : ""
-            }
-          >
-            Attendance
-          </NavLink>
+          <NavLink to="/erp/student/library">Library Details</NavLink>
         </li>
         <li className="mb-3">
-          <NavLink
-            to="/exams"
-            className={({ isActive }) =>
-              isActive
-                ? "text-white font-bold relative before:content-['•'] before:absolute before:left-[-20px] before:text-white before:text-xl"
-                : ""
-            }
-          >
-            Exams
-          </NavLink>
+          <NavLink to="/erp/student/events">Events / Placement</NavLink>
         </li>
         <li className="mb-3">
-          <NavLink
-            to="/fees"
-            className={({ isActive }) =>
-              isActive
-                ? "text-white font-bold relative before:content-['•'] before:absolute before:left-[-20px] before:text-white before:text-xl"
-                : ""
-            }
-          >
-            Fees
-          </NavLink>
+          <NavLink to="/erp/student/question-bank">Question Bank</NavLink>
         </li>
       </ul>
     </div>
