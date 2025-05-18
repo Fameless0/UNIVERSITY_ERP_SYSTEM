@@ -2,12 +2,16 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const pool = require("./db");
-
+const studentRoutes = require("./routes/students");
 const app = express();
 const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+
+
+app.use("/students", studentRoutes);
+
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
