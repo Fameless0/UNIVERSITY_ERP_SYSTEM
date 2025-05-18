@@ -1,3 +1,5 @@
+// src/config/dashboardConfig.js
+
 export const dashboardSettings = {
     student: {
       background: "linear-gradient(300deg, rgba(67,10,199,0.96), rgba(255,35,15,0.95))",
@@ -19,7 +21,7 @@ export const dashboardSettings = {
         { path: "/erp/faculty", label: "Dashboard" },
         { path: "/erp/faculty/assignments", label: "Assignments" },
         { path: "/erp/faculty/question-bank", label: "Question Bank" },
-
+        // You can add more items dynamically if needed
       ],
     },
   
@@ -27,6 +29,7 @@ export const dashboardSettings = {
       background: "linear-gradient(135deg, #00b09b, #96c93d)",
       sidebarItems: [
         { path: "/erp/employee", label: "Employee Dashboard" },
+        // For employee dashboard you can customize later
       ],
     },
   };

@@ -38,10 +38,6 @@ const Assignments = () => {
       <h2 className="text-3xl text-white mb-6">Assignments</h2>
 
       {!selected ? (
-<<<<<<< HEAD
-        // FOLDER VIEW
-=======
->>>>>>> back
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {assignments.map((assignment) => (
             <div
@@ -55,15 +51,8 @@ const Assignments = () => {
           ))}
         </div>
       ) : (
-<<<<<<< HEAD
-        // DETAIL VIEW
-        // DETAIL VIEW
-        <div className="relative max-w-2xl">
-          {/* Back Button - Positioned outside the card */}
-=======
         <div className="relative max-w-2xl">
           
->>>>>>> back
           <button
             onClick={() => setSelected(null)}
             className=" -top-10 left-0 flex items-center gap-2 text-white/70 hover:text-white"
@@ -74,11 +63,7 @@ const Assignments = () => {
 
           <div className="flex" >
 
-<<<<<<< HEAD
-          {/* Assignment Details Card */}
-=======
          
->>>>>>> back
           <div className="mt-4 md:w-[500px] bg-white/10 p-6 rounded-xl border border-white/20 text-white backdrop-blur-md">
             <h3 className="text-2xl font-bold mb-4">{selected.title}</h3>
             <p><span className="font-semibold">Due Date:</span> {selected.dueDate}</p>
@@ -94,10 +79,6 @@ const Assignments = () => {
             </p>
           </div>
 
-<<<<<<< HEAD
-          {/* Faculty Details Card */}
-=======
->>>>>>> back
           <div className="ms-6 mt-6 md:w-[400px] bg-white/10 p-6 rounded-xl border border-white/20 text-white backdrop-blur-md max-w-2xl">
             <h3 className="text-xl font-bold mb-4">Faculty Details</h3>
             <div className="space-y-2 text-sm">

@@ -20,10 +20,7 @@ function Login() {
             "linear-gradient(300deg, rgba(67, 10, 199, 0.96), rgba(255, 35, 15, 0.95))",
         }}
       >
-<<<<<<< HEAD
         {/* Faculty Card */}
-=======
->>>>>>> back
         <div
           onClick={() => handleSelection("faculty")}
           className="w-72 h-80 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:scale-105 transition-all duration-300"
@@ -32,10 +29,7 @@ function Login() {
           <h2 className="text-3xl font-semibold">Faculty</h2>
         </div>
 
-<<<<<<< HEAD
         {/* Student Card */}
-=======
->>>>>>> back
         <div
           onClick={() => handleSelection("student")}
           className="w-72 h-80 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:scale-105 transition-all duration-300"
@@ -44,10 +38,7 @@ function Login() {
           <h2 className="text-3xl font-semibold">Student</h2>
         </div>
 
-<<<<<<< HEAD
         {/* Employee Card */}
-=======
->>>>>>> back
         <div
           onClick={() => handleSelection("employee")}
           className="w-72 h-80 bg-white/10 border border-white/20 backdrop-blur-xl rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:scale-105 transition-all duration-300"

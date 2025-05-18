@@ -79,6 +79,7 @@ const DashboardConfigEditor = () => {
         Editing {type.charAt(0).toUpperCase() + type.slice(1)} Dashboard
       </h1>
 
+      {/* Background Color Changer */}
       <div className="bg-white/20 backdrop-blur-md p-6 rounded-lg max-w-lg mx-auto">
         <h2 className="text-xl text-white mb-4">Background</h2>
         <input
@@ -89,7 +90,8 @@ const DashboardConfigEditor = () => {
           className="w-full p-2 rounded bg-white text-black"
         />
       </div>
-      
+
+      {/* Sidebar Manager */}
       <div className="bg-white/20 backdrop-blur-md p-6 rounded-lg max-w-lg mx-auto">
         <h2 className="text-xl text-white mb-4">Sidebar Items</h2>
 

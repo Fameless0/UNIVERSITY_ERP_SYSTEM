@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-=======
 import { dashboardSettings } from "../config/dashboardConfig";  // 🚀 New
->>>>>>> back
 import BellIcon from "../assets/icons/bell.png";
 import UserIcon from "../assets/icons/profile.png";
 import SettingsIcon from "../assets/icons/settings.png";
@@ -66,13 +63,7 @@ const CalendarCard = () => {
     <Card title="Calendar">
       <div className="grid grid-cols-7 gap-x-0 gap-y-3 text-center text-[11px] text-white">
         {weekdays.map((day) => (
-<<<<<<< HEAD
-          <div key={day} className="font-semibold">
-            {day}
-          </div>
-=======
           <div key={day} className="font-semibold">{day}</div>
->>>>>>> back
         ))}
         {Array.from({ length: firstDayOfMonth }).map((_, idx) => (
           <div key={`empty-${idx}`} />
@@ -87,13 +78,7 @@ const CalendarCard = () => {
             <div
               key={date}
               className={`w-9 h-9 mx-auto rounded-full flex flex-col items-center justify-center 
-<<<<<<< HEAD
-              ${dayOfWeek === 0 ? "bg-orange-500" : "bg-white"} ${
-                isPast ? "opacity-40" : ""
-              } text-black leading-tight`}
-=======
               ${dayOfWeek === 0 ? "bg-orange-500" : "bg-white"} ${isPast ? "opacity-40" : ""} text-black leading-tight`}
->>>>>>> back
             >
               <span className="text-sm">{date}</span>
             </div>
@@ -104,26 +89,10 @@ const CalendarCard = () => {
   );
 };
 
-<<<<<<< HEAD
-const Sidebar = () => (
-  <div className="bg-white/20 p-6 rounded-2xl h-[420px] w-64 ml-6 mt-10">
-    <ul className="text-white divide-y divide-white/30">
-      {[
-        { path: "/erp/student", label: "Dashboard" },
-        { path: "/erp/student/assignments", label: "Assignments" },
-        { path: "/erp/student/fees", label: "Fee Details" },
-        { path: "/erp/student/library", label: "Library Details" },
-        { path: "/erp/student/events", label: "Events / Placement" },
-        { path: "/erp/student/question-bank", label: "Question Bank" },
-        { path: "/erp/student/results", label: "All Results" },
-        { path: "/erp/student/feedback", label: "Help / Feedback" },
-      ].map((item) => (
-=======
 const Sidebar = ({ items }) => (
   <div className="bg-white/20 p-6 rounded-2xl h-[420px] w-64 ml-6 mt-10">
     <ul className="text-white divide-y divide-white/30">
       {items.map((item) => (
->>>>>>> back
         <li key={item.path} className="py-3">
           <NavLink
             to={item.path}
@@ -209,21 +178,6 @@ const StudentDashboard = () => {
   const navigate = useNavigate();
   const isDashboard = location.pathname === "/erp/student";
   const [isModalOpen, setIsModalOpen] = useState(false);
-<<<<<<< HEAD
-  const handleLogout = () => {
-    // Optional: clear session/localStorage
-    navigate("/");
-  };
-  return (
-    <div
-      className="min-h-screen flex"
-      style={{
-        background: "linear-gradient(300deg,rgba(67, 10, 199, 0.96),rgba(255, 35, 15, 0.95))",
-      }}
-    >
-      <div className="mt-6 flex flex-col">
-        <Sidebar />
-=======
 
   const currentSettings = dashboardSettings.student; // 🔥 config from file
 
@@ -238,7 +192,6 @@ const StudentDashboard = () => {
     >
       <div className="mt-6 flex flex-col">
         <Sidebar items={currentSettings.sidebarItems} />
->>>>>>> back
         <SettingsCard onOpenModal={() => setIsModalOpen(true)} onLogout={handleLogout} />
       </div>
 
@@ -246,11 +199,7 @@ const StudentDashboard = () => {
 
       <div className="flex-1 p-6 overflow-auto">
         <div className="flex justify-between items-center mb-6">
-<<<<<<< HEAD
-          <h1 className="text-2xl text-white">DASHBOARD</h1>
-=======
           <h1 className="text-2xl text-white">{currentSettings.title || "Dashboard"}</h1>
->>>>>>> back
           <div className="flex gap-4 items-center">
             <img src={BellIcon} alt="Notifications" className="w-10 h-10 cursor-pointer hover:opacity-80" />
             <img src={UserIcon} alt="User Profile" className="w-10 h-10 cursor-pointer hover:opacity-80" />
@@ -259,62 +208,22 @@ const StudentDashboard = () => {
 
         <Outlet />
 
-<<<<<<< HEAD
-        {isDashboard && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <Card title="Today's Schedule">
-                <ul className="space-y-2 text-white text-sm">
-                  <li className="flex justify-between border-b-2 border-white py-1">
-                    <span>9:30 - 10:30</span>
-                    <span className="font-semibold">Big Data</span>
-                  </li>
-                  <li className="flex justify-between border-b-2 border-white py-1">
-                    <span>10:30 - 11:30</span>
-                    <span className="font-semibold">AEC - III</span>
-                  </li>
-                  <li className="flex justify-between border-b-2 border-white py-1">
-                    <span>11:30 - 12:30</span>
-                    <span className="font-semibold">Software Testing</span>
-                  </li>
-                  <li className="flex justify-between border-b-2 border-white py-1">
-                    <span>12:30 - 01:30</span>
-                    <span className="font-semibold">Library</span>
-                  </li>
-                </ul>
-                <p className="mt-3 text-xs text-center text-white/70">END OF THE DAY</p>
-              </Card>
-
-=======
         {isDashboard && currentSettings.showDefaultWidgets && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <Card title="Today's Schedule">
                 {/* Your schedule here */}
               </Card>
->>>>>>> back
               <CalendarCard />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card title="Today's Attendance">
-<<<<<<< HEAD
-                <div className="flex items-center justify-center p-4">
-                  <CircularProgress value={70} />
-                </div>
-              </Card>
-
-              <Card title="Overall Attendance">
-                <div className="flex items-center justify-center p-4">
-                  <CircularProgress value={82.5} />
-                </div>
-=======
                 <CircularProgress value={70} />
               </Card>
 
               <Card title="Overall Attendance">
                 <CircularProgress value={82.5} />
->>>>>>> back
               </Card>
             </div>
           </>
